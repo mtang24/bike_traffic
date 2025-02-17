@@ -7,4 +7,46 @@ body {
     box-sizing: border-box;
     margin: auto;
     padding: 1em;
-  }
+}
+
+/* Styling for the header and interactive filter elements */
+header {
+    display: flex;
+    align-items: baseline;
+    gap: 1em;
+    padding: 1em;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header label {
+    margin-left: auto;
+    min-width: 400px; /* adjust as needed */
+}
+
+/* Make slider, <time>, and <em> stack vertically within the label */
+header label input[type="range"],
+header label time,
+header label em {
+    display: block;
+}
+
+header label input[type="range"] {
+    width: 100%;      /* fill the available width in its container */
+    max-width: 500px; /* optional: don't let it grow too large on wide screens */
+}
+
+/* Additional stylistic touches */
+header label time {
+    font-size: 1rem;
+    margin-top: 0.5em;
+}
+
+/* Emphasis styling for the <em> element */
+header label em {
+    color: #777;
+    font-style: italic;
+    font-size: 0.9rem;
+}
