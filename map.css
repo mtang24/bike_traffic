@@ -13,6 +13,19 @@ html, body {
     border-radius: 8px; /* Optional: rounded corners */
 }
 
+/* Shared custom properties for both circles & legend items */
+#map svg circle,
+.legend > div {
+    --color-departures: steelblue;
+    --color-arrivals: darkorange;
+    --color: color-mix(
+        in oklch,
+        var(--color-departures) calc(100% * var(--departure-ratio)),
+        var(--color-arrivals)
+    );
+}
+
+/* Circle styling */
 #map svg {
     position: absolute;
     z-index: 1;
@@ -22,9 +35,41 @@ html, body {
 }
 
 #map svg circle {
-    fill: steelblue;
     fill-opacity: 60%;
     stroke: white;
     pointer-events: auto; /* Enable pointer events on circles for tooltips */
+    fill: var(--color);
 }
 
+/* Legend container: use flexbox with a 1px gap */
+.legend {
+    display: flex;
+    gap: 1px; /* just enough to prevent swatches from touching */
+    margin-block: 1em;  /* vertical spacing between the legend and the map */
+}
+
+/* Each legend swatch takes up equal space */
+.legend > div {
+    flex: 1;
+    padding: 0.25em 1em; /* significantly more horizontal padding than vertical */
+}
+
+/* Example text alignment and colors for each swatch */
+/* Adjust these rules as needed based on your chosen colors for sufficient contrast */
+.legend > div:nth-child(1) {
+    text-align: left;
+    background: var(--color-departures);
+    color: white; /* pick a contrasting color */
+}
+
+.legend > div:nth-child(2) {
+    text-align: center;
+    background: var(--color);
+    color: rgb(255, 255, 255);
+}
+
+.legend > div:nth-child(3) {
+    text-align: right;
+    background: var(--color-arrivals);
+    color: white;
+}

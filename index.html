@@ -8,11 +8,11 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <!-- Mapbox GL JS CSS -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
-    <title>Bikewatching</title>
+    <title>Bike Traffic in Boston</title>
 </head>
 <body>
     <header>
-        <h1>🚴🏼‍♀️ Bikewatching</h1>
+        <h1>🚴🏼‍♀️ Bike Traffic in Boston</h1>
         <label>
             Filter by time:
             <input type="range" id="time-slider" min="-1" max="1440" value="-1">
@@ -23,6 +23,12 @@
 
     <div id="map">
         <svg></svg>
+    </div>
+
+    <div class="legend">
+        <div style="--departure-ratio: 1">More departures</div>
+        <div style="--departure-ratio: 0.5">Balanced</div>
+        <div style="--departure-ratio: 0">More arrivals</div>
     </div>
 
     <!-- Load D3.js from CDN -->

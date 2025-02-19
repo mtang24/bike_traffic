@@ -21,6 +21,8 @@ let filteredArrivals = new Map();
 let filteredDepartures = new Map();
 let filteredStations = [];
 
+let stationFlow = d3.scaleQuantize().domain([0, 1]).range([0, 0.5, 1]);
+
 // Function to project station coordinates into pixel coordinates
 function getCoords(station) {
     const point = new mapboxgl.LngLat(+station.lon, +station.lat);  // Convert lon/lat to Mapbox LngLat
@@ -73,7 +75,7 @@ map.on('load', () => {
             .attr('fill', 'steelblue')  // Circle fill color
             .attr('stroke', 'white')    // Circle border color
             .attr('stroke-width', 1)    // Circle border thickness
-            .attr('opacity', 0.8);      // Circle opacity
+            .attr('opacity', 0.8);     // Circle opacity
 
         // Define updatePositions within the scope of circles
         function updatePositions() {
@@ -135,8 +137,10 @@ map.on('load', () => {
             .each(function(d) {
               d3.select(this)
                 .append('title')
-                .text(`${d.totalTraffic} trips (${d.departures, d.arrivals} arrivals)`);
-            });
+                .text(`${d.totalTraffic} trips (${d.departures, d.arrivals} arrivals)`)
+            })
+            .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic));
+
     }).catch(error => {
         console.error('Error loading CSV Data:', error);
     });
@@ -215,7 +219,7 @@ function filterTripsbyTime() {
 
     // After building filteredStations in filterTripsbyTime():
     const currentStations = timeFilter === -1 ? stations : filteredStations;
-    const radiusRange = timeFilter === -1 ? [0, 25] : [0, 15];
+    const radiusRange = timeFilter === -1 ? [0, 25] : [0, 20];
 
     const updatedRadiusScale = d3.scaleSqrt()
     .domain([0, d3.max(currentStations, d => d.totalTraffic)])
@@ -230,5 +234,6 @@ function filterTripsbyTime() {
         d3.select(this)
         .append('title')
         .text(`${d.totalTraffic} trips (${d.departures} departures, ${d.arrivals} arrivals)`);
-    });
+    })
+    .style("--departure-ratio", d => stationFlow(d.departures / d.totalTraffic));
 }
