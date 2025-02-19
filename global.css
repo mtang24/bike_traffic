@@ -9,44 +9,93 @@ body {
     padding: 1em;
 }
 
-/* Styling for the header and interactive filter elements */
+/* Increase the gap in the header and make h1 larger */
 header {
     display: flex;
-    align-items: baseline;
-    gap: 1em;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2em;           /* Increase gap to give more breathing room */
     padding: 1em;
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 header h1 {
     margin: 0;
+    flex-shrink: 0;      /* Prevent h1 from shrinking */
+    font-size: 2rem;   /* Make the title larger */
 }
 
-header label {
-    margin-left: auto;
-    min-width: 400px; /* adjust as needed */
+/* Ensure the filter group sits far to the right */
+/* Remove flex: 1 and instead use a fixed width for the filter group */
+header label.filter-group {
+    margin-left: auto; 
+    display: flex; 
+    align-items: center;
+    gap: 0.5em;
+    width: 600px; /* adjust width as desired */
+    justify-content: flex-end;  /* Align the controls to the right */
 }
 
-/* Make slider, <time>, and <em> stack vertically within the label */
-header label input[type="range"],
-header label time,
-header label em {
-    display: block;
+/* Maintain the inline-flex for the controls inside the filter group */
+.filter-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    flex: 1;
 }
 
-header label input[type="range"] {
-    width: 100%;      /* fill the available width in its container */
-    max-width: 500px; /* optional: don't let it grow too large on wide screens */
+/* Adjust the slider, time, and em elements if needed */
+.filter-controls input[type="range"],
+.filter-controls time,
+.filter-controls em {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
 }
 
-/* Additional stylistic touches */
-header label time {
+.filter-controls input[type="range"] {
+    width: 100%;
+    max-width: 400px; /* adjust for desired slider length */
+    margin-top: 0;
+    vertical-align: middle;
+}
+
+.filter-controls time {
     font-size: 1rem;
-    margin-top: 0.5em;
+    min-width: 4em;    /* ensure enough space for text */
+    width: 60px;        /* Fixed width in pixels */
+    text-align: center; /* Center the text so they look identical */
+    margin-top: 0;
+    vertical-align: middle;
+    box-sizing: border-box;
 }
 
-/* Emphasis styling for the <em> element */
-header label em {
+.filter-controls em {
     color: #777;
     font-style: italic;
     font-size: 0.9rem;
+    position: relative;
+    top: -2px;
+    min-width: 4em;
+    width: 60px;        /* Fixed width in pixels */
+    text-align: center; /* Center the text so they look identical */
+    box-sizing: border-box;
+}
+
+/* Optional: If you want the filter-group to not stretch the full width of the header,
+   you could set a max-width and then margin-left: auto:
+   
+   .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      max-width: 500px; 
+      margin-left: auto;
+   }
+*/
+
+/* Ensure the label doesn't wrap */
+.filter-text {
+  white-space: nowrap;
+  margin-right: 1em;
 }

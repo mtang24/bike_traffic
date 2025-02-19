@@ -73,3 +73,25 @@ html, body {
     background: var(--color-arrivals);
     color: white;
 }
+
+.time-wrapper {
+  position: relative;
+  width: 60px; /* fixed width */
+  height: 1em; /* or adjust as needed */
+  display: inline-block;
+}
+.time-wrapper time,
+.time-wrapper em {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+}
+.time-wrapper em {
+  transform: translateY(-5px);
+}
+.time-wrapper time {
+  transform: translateY(-5px);
+}

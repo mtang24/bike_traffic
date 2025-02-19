@@ -13,11 +13,16 @@
 <body>
     <header>
         <h1>🚴🏼‍♀️ Bike Traffic in Boston</h1>
-        <label>
-            Filter by time:
-            <input type="range" id="time-slider" min="-1" max="1440" value="-1">
-            <time id="selected-time"></time>
-            <em id="any-time">(any time)</em>
+        <!-- Group the filter text with the controls -->
+        <label class="filter-group">
+            <span class="filter-text">Filter by time:</span>
+            <span class="filter-controls">
+                <input type="range" id="time-slider" min="-1" max="1440" value="-1">
+                <span class="time-wrapper">
+                    <time id="selected-time">12:00 PM</time>
+                    <em id="any-time">(any time)</em>
+                </span>
+            </span>
         </label>
     </header>
 

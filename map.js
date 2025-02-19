@@ -169,6 +169,14 @@ function updateTimeDisplay() {
   
     // Trigger filtering logic which will be implemented in the next step
     filterTripsbyTime();
+
+    if (timeFilter === -1) {
+        document.getElementById("selected-time").style.opacity = "0";
+        document.getElementById("any-time").style.opacity = "1";
+    } else {
+        document.getElementById("selected-time").style.opacity = "1";
+        document.getElementById("any-time").style.opacity = "0";
+    }
 }
 
 timeSlider.addEventListener('input', updateTimeDisplay);
